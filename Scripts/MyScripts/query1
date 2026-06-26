@@ -1,0 +1,13 @@
+--create a list of employee's First and Last name, with the first and last name of their manager
+select emp.firstname
+      ,emp.lastName
+      ,emp.employeeId
+      ,emp.managerId
+      ,mng.firstName as ManagerFirstName
+      ,mng.lastName as ManagerLastName
+      ,mng.employeeId
+      ,mng.managerId
+   from employee emp
+    inner join 
+        employee mng
+    where emp.managerId = mng.employeeId;
