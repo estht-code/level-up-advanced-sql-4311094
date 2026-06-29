@@ -1,0 +1,20 @@
+SELECT
+  sls.employeeId,
+  emp.firstName,
+  emp.lastName,
+  mdl.modelName,
+  COUNT(*) AS totalSales
+FROM sales sls
+INNER JOIN inventory inv
+  ON sls.inventoryId = inv.inventoryId
+INNER JOIN model mdl
+  ON inv.modelId = mdl.modelId
+INNER JOIN employee emp
+  ON sls.employeeId = emp.employeeId
+GROUP BY
+  sls.employeeId,
+  emp.firstName,
+  emp.lastName,
+  mdl.modelName
+ORDER BY totalSales DESC;
+
