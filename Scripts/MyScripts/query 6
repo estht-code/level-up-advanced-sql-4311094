@@ -1,4 +1,10 @@
 -- Using subquery to find all sales when the car purchased was electric
+/* Why INNER JOIN is used
+INNER JOIN returns only rows where sales.inventoryId matches an inventory.inventoryId.
+In this query, we need values from inventory (inv.colour, inv.year, inv.modelId) and we only care about sales with a valid inventory row.
+A LEFT JOIN would include sales with no matching inventory, but those rows would have NULL for the inventory columns and would not satisfy the subquery/filter logic anyway.
+So INNER JOIN is the correct choice because the query is specifically selecting sales that have a matching inventory record.
+*/
 SELECT sls.soldDate
       , sls.salesAmount
       , inv.colour
