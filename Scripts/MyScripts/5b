@@ -1,0 +1,31 @@
+WITH sales_cte AS (
+  SELECT
+    emp.employeeId,
+    emp.firstName,
+    emp.lastName,
+    strftime('%m', sls.soldDate) AS SaleMonth,
+    1 AS saleCount
+  FROM employee emp
+  JOIN sales sls
+    ON emp.employeeId = sls.employeeId
+  WHERE strftime('%Y', sls.soldDate) = '2021'
+)
+SELECT
+  employeeId,
+  firstName,
+  lastName,
+  SUM(CASE WHEN SaleMonth = '01' THEN saleCount ELSE 0 END) AS JanSales,
+  SUM(CASE WHEN SaleMonth = '02' THEN saleCount ELSE 0 END) AS FebSales,
+  SUM(CASE WHEN SaleMonth = '03' THEN saleCount ELSE 0 END) AS MarSales,
+  SUM(CASE WHEN SaleMonth = '04' THEN saleCount ELSE 0 END) AS AprSales,
+  SUM(CASE WHEN SaleMonth = '05' THEN saleCount ELSE 0 END) AS MaySales,
+  SUM(CASE WHEN SaleMonth = '06' THEN saleCount ELSE 0 END) AS JunSales,
+  SUM(CASE WHEN SaleMonth = '07' THEN saleCount ELSE 0 END) AS JulSales,
+  SUM(CASE WHEN SaleMonth = '08' THEN saleCount ELSE 0 END) AS AugSales,
+  SUM(CASE WHEN SaleMonth = '09' THEN saleCount ELSE 0 END) AS SepSales,
+  SUM(CASE WHEN SaleMonth = '10' THEN saleCount ELSE 0 END) AS OctSales,
+  SUM(CASE WHEN SaleMonth = '11' THEN saleCount ELSE 0 END) AS NovSales,
+  SUM(CASE WHEN SaleMonth = '12' THEN saleCount ELSE 0 END) AS DecSales
+FROM sales_cte
+GROUP BY employeeId, firstName, lastName
+ORDER BY lastName, firstName;

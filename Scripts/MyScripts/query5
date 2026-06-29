@@ -1,0 +1,13 @@
+-- Display number of sale for each employee by month for 2021 using CTE and CASE
+WITH CTE AS (
+    SELECT emp.employeeId, 
+        emp.firstName, 
+        emp.lastName, 
+        strftime('%Y-%m', sls.soldDate) AS SaleMonth,
+        count(*) as TotalSales
+    FROM employee emp
+    JOIN sales sls ON emp.employeeId = sls.employeeId
+    WHERE strftime('%Y', sls.soldDate) = '2021'
+    GROUP BY emp.employeeId, emp.firstName, emp.lastName, SaleMonth
+)
+SELECT * FROM CTE;
