@@ -10,4 +10,4 @@ select emp.firstname
    from employee emp
     inner join 
         employee mng
-    where emp.managerId = mng.employeeId;
+    ON emp.managerId = mng.employeeId;

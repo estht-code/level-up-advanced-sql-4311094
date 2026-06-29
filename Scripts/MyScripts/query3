@@ -1,0 +1,17 @@
+-- Find the least and most expensive car sold by each employee this year
+
+SELECT emp.employeeId, 
+    emp.firstName, 
+    emp.lastName, 
+    MIN(salesAmount) AS MinSalesAmount, 
+    MAX(salesAmount) as MaxSalesAmount,
+    count(*) as TotalSales
+FROM sales sls
+INNER JOIN employee emp
+    ON sls.employeeId = emp.employeeId
+-- change date filter to only include sales from 2022 
+WHERE strftime('%Y', sls.soldDate) = '2022'
+GROUP BY emp.employeeId, emp.firstName, emp.lastName
+HAVING count(*) >= 5;
+
+
