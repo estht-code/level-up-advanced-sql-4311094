@@ -1,0 +1,11 @@
+-- Using subquery to find all sales when the car purchased was electric
+SELECT sls.soldDate
+      , sls.salesAmount
+      , inv.colour
+      , inv.year
+FROM sales sls
+INNER JOIN inventory inv
+  ON sls.inventoryId = inv.inventoryId
+INNER JOIN model mdl
+  ON inv.modelId = mdl.modelId
+WHERE mdl.EngineType = 'Electric';
