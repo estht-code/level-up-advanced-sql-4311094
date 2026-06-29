@@ -7,6 +7,8 @@ FROM sales
 )
 SELECT soldYear, 
   FORMAT("$%.2f", sum(salesAmount)) AS AnnualSales
+  --In pure SQLite, FORMAT doesn't exist. You’d use:
+  --printf ("$%.2f", sum(salesAmount)) AS AnnualSales
 FROM cte
 GROUP BY soldYear
 ORDER BY soldYear

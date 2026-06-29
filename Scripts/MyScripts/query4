@@ -1,0 +1,12 @@
+-- Create a report showing the total sales amount for each year, formatted as currency.
+WITH CTE AS (
+    SELECT
+        salesAmount,
+        strftime('%Y', soldDate) AS soldYear
+    FROM sales
+ )
+SELECT soldYear, 
+  printf("$%.2f", sum(salesAmount)) AS AnnualSales
+FROM CTE
+GROUP BY soldYear
+ORDER BY soldYear;
