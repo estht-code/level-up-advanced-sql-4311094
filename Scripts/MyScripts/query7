@@ -2,7 +2,7 @@ SELECT
   sls.employeeId,
   emp.firstName,
   emp.lastName,
-  mdl.modelName,
+  mdl.model,
   COUNT(*) AS totalSales
 FROM sales sls
 INNER JOIN inventory inv
@@ -15,6 +15,6 @@ GROUP BY
   sls.employeeId,
   emp.firstName,
   emp.lastName,
-  mdl.modelName
-ORDER BY totalSales DESC;
+  mdl.model;
+--ORDER BY totalSales DESC;
 
